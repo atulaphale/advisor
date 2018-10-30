@@ -1,0 +1,29 @@
+doctype html
+html  
+  head
+    title Inference
+  body    
+    h3 Results
+    table 
+      tbody
+        tr 
+          td  Score for application to be hosted on public cloud 
+          td  &nbsp&nbsp
+          td=  cloudScore
+        tr 
+          td  Score for application to be hosted on premises
+          td  &nbsp&nbsp
+          td=  onPremScore
+    h3 Inference
+    p= inferenceMsg
+    table
+      tbody
+        tr  
+          td  &nbsp&nbsp
+        tr
+          td  
+            a(href="Print"): button(type="submit", formmethod="post") Print
+          td  
+            a(href="Save"): button(type="submit", formmethod="post") Save
+          td  
+            a(href="Email"): button(type="submit", formmethod="post") Email

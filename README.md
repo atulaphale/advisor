@@ -1,2 +1,2 @@
 # advisor
-Advises on the application
+Advises on the application deployment
