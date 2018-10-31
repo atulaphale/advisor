@@ -10,22 +10,25 @@ app.get('/', function (req, res) {
     var data = req.query.jsonData;
     var cloudScore = computeScores.getFinalCloudScore(data);
     var onPremScore = computeScores.getFinalOnPremScore(data);
-    var inferenceMsg = "";
+    var inferenceMsg = "";    
     if (cloudScore < onPremScore)
         inferenceMsg = "The application is more suited to be hosted on premises";
     else if (cloudScore == onPremScore)
         inferenceMsg = "The application can be hosted on-premises or on the cloud";
     else
-        inferenceMsg = "The Application is more suited to be hosted on public cloud";
-    res.render("inferenceTemplate", { cloudScore: cloudScore, onPremScore: onPremScore, inferenceMsg: inferenceMsg });
+        inferenceMsg = "The Application is more suited to be hosted on public cloud";    
+    app.render("inferenceTemplate", { cloudScore: cloudScore, onPremScore: onPremScore, inferenceMsg: inferenceMsg}, function(err, html) {
+        res.render("inferenceTemplate", { cloudScore: cloudScore, onPremScore: onPremScore, inferenceMsg: inferenceMsg, htmlContent: html });        
+    });  
+    
 });
 
 //Call the 'Print' microservice to print PDF
-app.get('/print', function (req, res) {
+app.get('/print*', function (req, res) {
     Request
         .get({
             "headers": { "content-type": "application/pdf" },
-            "url": "http://localhost:8081/print" + "?htmlContent=<html><body>Hello</body></html>"
+            "url": "http://localhost:8081/print" + "?htmlContent=" + req.query.htmlContent
         })
         .on('error', function (err) {
             console.log(err)

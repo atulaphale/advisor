@@ -2,27 +2,24 @@ doctype html
 html  
   head
     title Inference
-  body    
-    h3 Results
-    table 
-      tbody
+  body
+    div    
+      h3  Results
+      table     
         tr 
-          td  Score for application to be hosted on public cloud 
-          td  &nbsp&nbsp
-          td=  cloudScore
+          td  Score for application to be hosted on public cloud          
+          td  #{cloudScore}
         tr 
           td  Score for application to be hosted on premises
-          td  &nbsp&nbsp
-          td=  onPremScore
-    h3 Inference
-    p= inferenceMsg
-    table
-      tbody
-        tr  
-          td  &nbsp&nbsp
+          td  #{onPremScore}
+    div
+      h3  Inference
+      p  #{inferenceMsg}
+    div
+      table
         tr
           td  
-            a(href="print"): button(type="submit", formmethod="post") Print
+            a(href="print?htmlContent=" + htmlContent): button(type="submit", formmethod="post") Print
           td  
             a(href="save"): button(type="submit", formmethod="post") Save
           td  
