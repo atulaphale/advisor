@@ -24,7 +24,7 @@ app.get('/', function (req, res) {
 });
 
 //Call the 'Print' microservice to print PDF
-app.get('/print*', function (req, res) {
+app.get('/print', function (req, res) {
     Request
         .get({
             "headers": { "content-type": "application/pdf" },
@@ -56,6 +56,14 @@ app.get('/save', function (req, res) {
 
 //Call the 'Email' microservice to mail the inference
 app.get('/email', function (req, res) {
-
+    Request
+        .post({
+            "headers": { "content-type": "application/json" },
+            "url": "http://localhost:8083/api/v1/email" + "?toAddress=atulaphale@gmail.com" + "&subject=InferenceReport" + "&body=" + req.query.htmlContent 
+        })
+        .on('error', function (err) {
+            console.log(err)
+        })
+        .pipe(res)
 });
 app.listen(5000, 'localhost');
