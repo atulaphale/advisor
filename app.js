@@ -26,9 +26,9 @@ app.get('/', function (req, res) {
 //Call the 'Print' microservice to print PDF
 app.get('/print', function (req, res) {
     Request
-        .get({
+        .post({
             "headers": { "content-type": "application/pdf" },
-            "url": "http://localhost:8081/print" + "?htmlContent=" + req.query.htmlContent
+            "url": "http://localhost:8081/api/v1/print" + "?htmlContent=" + req.query.htmlContent
         })
         .on('error', function (err) {
             console.log(err)
